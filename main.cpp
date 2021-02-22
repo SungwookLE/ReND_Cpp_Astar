@@ -4,21 +4,10 @@
 #include "boardfile.h"
 #include "a_star.h"
 
-
-
-// void Search();
-
-// void CellSort();
-
-// void ExpandNeighbors();
-// void CheckValidCell();
-// void Heuristic();
-// void AddToOpen();
-
 int main(){
 
 
-    files maze("test.txt");
+    files maze("maze.txt");
     maze.ReadBoardFile();
     std::cout<< "MAZE is: " << std::endl;
     maze.PrintGrid();
@@ -28,9 +17,6 @@ int main(){
     maze.set_solution(Search(maze.init, maze.goal, maze.grid));
     maze.PrintSolution();
     
-
-
-
 
     return 0;
 }

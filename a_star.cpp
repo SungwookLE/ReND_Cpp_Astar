@@ -3,8 +3,6 @@
 std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal,  
                                     std::vector<std::vector<int>> grid)
 {
-
-
     int cost= 1;
     std::vector<int> temp_closed(grid[0].size(), 0);
     std::vector<std::vector<int>> closed(grid.size(), temp_closed );
@@ -14,8 +12,9 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
 
     closed[init[0]][init[1]]=1; // closed
 
+    // Heuristic()
     std::vector<std::vector<int>> heuristic_map;
-    heauristic_grid(grid,goal, heuristic_map);
+    heauristic_grid(grid,goal, heuristic_map); 
 
     int x = init[0];
     int y = init[1];
@@ -41,13 +40,13 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
 
     while ( found != true and resign !=true)
     {
-
         if (opens.size() == 0){
             resign = true;
             std::cout << "Fail to find the exit!" << std::endl;
             break;
         }
         else{
+            // CellSort()
             std::sort(opens.begin(), opens.end(), [](std::vector<int> a,std::vector<int> b)
             {   if (a[0] > b[0]) 
                     return true;
@@ -78,15 +77,17 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
                 found = true;
             }
             else{
+                // ExpandNeighbors()
                 for(int i =0 ; i < delta.size() ; ++i){
                     int x2 = x + delta[i][0];
                     int y2 = y + delta[i][1];
-
+                    // CheckValidCell()
                     if ((x2 >= 0) && (x2 < grid.size()) && (y2>=0) && (y2 < grid[0].size()) ){
                         if ((closed[x2][y2] == 0) && (grid[x2][y2] ==0)){
                             int g2 = g +cost;
                             int h2 = heuristic_map[x2][y2];
                             int f2 = g2 + h2;
+                            // AddToOpen()
                             opens.push_back({f2,g2,x2,y2});
                             closed[x2][y2] = 1;
                         }
