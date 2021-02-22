@@ -7,6 +7,7 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <iomanip>
 
 class files{
     public:
@@ -17,27 +18,27 @@ class files{
         for(int i =0 ; i < solution.size() ; ++i){
             for (int j=0; j < solution[0].size(); ++j){
                 if (j != (solution[0].size()-1))
-                    std::cout << solution[i][j] << ", ";
+                    std::cout << std::setw(3) <<solution[i][j] << ", ";
                 else
-                    std::cout << solution[i][j];
+                    std::cout << std::setw(3) <<solution[i][j];
             }
             std::cout << std::endl;
         }
     }
     void set_solution(std::vector<std::vector<int>> res){
-        std::copy( res.begin(), res.end(), solution.begin() );
+        solution=res;
     }
     void PrintGrid(){
         for(int i =0 ; i < grid.size() ; ++i){
             for (int j=0; j < grid[0].size(); ++j){
                 if ( (j == init[0]) && (i == init[1]) )
-                    std::cout << "*" << "  ";
+                    std::cout <<  std::setw(3) <<"*" << "  ";
                 else if (j != (grid[0].size()-1))
-                    std::cout << grid[i][j] << "  ";
+                    std::cout << std::setw(3) << grid[i][j] << "  ";
                 else if ( (j == goal[1]) && (i == goal[0]) )
-                    std::cout << "*" ; // goal
+                    std::cout << std::setw(3) << "*" ; // goal
                 else
-                    std::cout << grid[i][j];
+                    std::cout << std::setw(3) <<grid[i][j];
             }
             std::cout << std::endl;
         }

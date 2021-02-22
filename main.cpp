@@ -24,8 +24,8 @@ int main(){
     maze.PrintGrid();
 
     std::cout<< "ESCAPE is: " << std::endl;
-    Search(maze.init, maze.goal, maze.grid);
-    //maze.set_solution();
+    
+    maze.set_solution(Search(maze.init, maze.goal, maze.grid));
     maze.PrintSolution();
     
 
