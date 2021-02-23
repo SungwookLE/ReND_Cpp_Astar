@@ -15,20 +15,22 @@ class files{
 
     void ReadBoardFile();
     void PrintSolution(){
+        std::cout<< "NAVI is: " << std::endl;
         for(int i =0 ; i < solution.size() ; ++i){
             for (int j=0; j < solution[0].size(); ++j){
                 if (j != (solution[0].size()-1))
-                    std::cout << std::setw(3) <<solution[i][j] << ", ";
+                    std::cout << std::setw(3) <<solution[i][j] << "  ";
                 else
                     std::cout << std::setw(3) <<solution[i][j];
             }
             std::cout << std::endl;
         }
     }
-    void set_solution(std::vector<std::vector<int>> res){
+    void set_solution(std::vector<std::vector<std::string>> res){
         solution=res;
     }
     void PrintGrid(){
+        std::cout<< "MAZE is: " << std::endl;
         for(int i =0 ; i < grid.size() ; ++i){
             for (int j=0; j < grid[0].size(); ++j){
                 if ( (j == init[0]) && (i == init[1]) )
@@ -48,7 +50,7 @@ class files{
     std::vector<int> goal;
 
     private:
-    std::vector<std::vector<int>> solution;
+    std::vector<std::vector<std::string>> solution;
     std::string board_file;
     
 

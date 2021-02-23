@@ -1,6 +1,6 @@
 #include "a_star.h"
 
-std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal,  
+std::vector<std::vector<std::string>> Search(std::vector<int> init, std::vector<int>goal,  
                                     std::vector<std::vector<int>> grid)
 {
     int cost= 1;
@@ -8,7 +8,20 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
     std::vector<std::vector<int>> closed(grid.size(), temp_closed );
 
     std::vector<int> temp_expand(grid[0].size(), -1);
-    std::vector<std::vector<int>> expand(grid.size(), temp_closed );
+    std::vector<std::vector<int>> expand(grid.size(), temp_expand );
+
+    std::vector<std::string> temp_navi(grid[0].size(), " ");
+    std::vector<std::vector<std::string>> navi(grid.size(), temp_navi );
+
+    for(int row = 0; row < navi.size(); ++row){
+        for(int col=0; col < navi[0].size(); ++col){
+            if (grid[row][col] != 0 )
+                navi[row][col] = "#";
+        }
+    }
+
+    std::vector<int> temp_info(grid[0].size(), -1);
+    std::vector<std::vector<int>> info(grid.size(), temp_info );
 
     closed[init[0]][init[1]]=1; // closed
 
@@ -37,6 +50,8 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
           { 0, -1}, // go left
           { 1, 0 }, // go down
           { 0, 1 }}; // go right
+
+    std::vector<std::string> delta_name = { "^", "<", "v", ">"};
 
     while ( found != true and resign !=true)
     {
@@ -75,6 +90,16 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
             count+=1;
             if (( x == goal[0]) && ( y == goal[1])){
                 found = true;
+                // SAVE NAVIGATION
+                navi[x][y] = "*";
+                while ( (x != init[0]) || (y!=init[1]) ){
+                    int x_ex = x - delta[info[x][y]][0];
+                    int y_ex = y - delta[info[x][y]][1];
+                    navi[x_ex][y_ex] = delta_name[info[x][y]];
+                    x= x_ex;
+                    y= y_ex;
+                }
+                navi[x][y]="*";
             }
             else{
                 // ExpandNeighbors()
@@ -90,17 +115,27 @@ std::vector<std::vector<int>> Search(std::vector<int> init, std::vector<int>goal
                             // AddToOpen()
                             opens.push_back({f2,g2,x2,y2});
                             closed[x2][y2] = 1;
+                            info[x2][y2] = i;
                         }
                     }
-
                 }
             }
-    
-
         }
     }
+    /* if needed COST VALUE MONITORING, comment in)
+    std::cout<< "COST is: " << std::endl;
+    for(int i =0 ; i < expand.size() ; ++i){
+            for (int j=0; j < expand[0].size(); ++j){
+                if (j != (expand[0].size()-1))
+                    std::cout << std::setw(3) <<expand[i][j] << "  ";
+                else
+                    std::cout << std::setw(3) <<expand[i][j];
+            }
+            std::cout << std::endl;
+    }
+    */
 
-    return expand;
+    return navi;
 }
 
 

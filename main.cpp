@@ -5,15 +5,10 @@
 #include "a_star.h"
 
 int main(){
-
-
     files maze("maze.txt");
     maze.ReadBoardFile();
-    std::cout<< "MAZE is: " << std::endl;
-    maze.PrintGrid();
-
-    std::cout<< "ESCAPE is: " << std::endl;
     
+    maze.PrintGrid();
     maze.set_solution(Search(maze.init, maze.goal, maze.grid));
     maze.PrintSolution();
     
