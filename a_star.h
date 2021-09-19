@@ -12,7 +12,6 @@
 // 
 
 class A_star{
-
 public:
     /**
     * @brief Construct a new a star object

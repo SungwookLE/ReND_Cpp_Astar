@@ -3,7 +3,6 @@
 std::vector<std::vector<std::string>> A_star::Search(){
 
     initialize();
-
     while ( found != true && resign != true){
 
         if (opens.size() == 0){
@@ -98,6 +97,5 @@ std::vector<std::vector<std::string>> A_star::Search(){
         std::cout << std::endl;
     }
     */
-
     return navi;
 }
