@@ -6,13 +6,15 @@
 
 int main(){
     files maze("maze.txt");
+
+
     maze.ReadBoardFile();
-    
+
+    A_star solver(maze.init, maze.goal, maze.grid);
     maze.PrintGrid();
-    maze.set_solution(Search(maze.init, maze.goal, maze.grid));
+    maze.set_solution(solver.Search());
     maze.PrintSolution();
     
-
     return 0;
 }
 

@@ -45,6 +45,17 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "ctime": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "cstring": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "map": "cpp",
+        "ratio": "cpp",
+        "set": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp"
     }
 }
