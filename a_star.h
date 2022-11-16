@@ -11,6 +11,8 @@
 
 std::vector<std::vector<std::string>> Search(std::vector<int> init, std::vector<int>goal, std::vector<std::vector<int>> grid);
 int manhatan_dist(std::vector<int> target, std::vector<int> goal);
-void heauristic_grid(std::vector<std::vector<int>> grid, std::vector<int> goal,std::vector<std::vector<int>> &heauristic);
+void heauristic_map(std::vector<std::vector<int>> grid, std::vector<int> goal,std::vector<std::vector<int>> &heauristic);
+
+extern std::vector<std::vector<int>> count_traced;
 
 #endif

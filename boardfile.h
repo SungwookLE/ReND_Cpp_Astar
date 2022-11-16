@@ -8,52 +8,60 @@
 #include <algorithm>
 #include <sstream>
 #include <iomanip>
+#include "a_star.h"
 
 class files{
     public:
     files(std::string file): board_file(file){}
 
     void ReadBoardFile();
+
     void PrintSolution(){
-        std::cout<< "NAVI is: " << std::endl;
+        std::cout<< "Solution is: " << std::endl;
         for(int i =0 ; i < solution.size() ; ++i){
-            for (int j=0; j < solution[0].size(); ++j){
-                if (j != (solution[0].size()-1))
-                    std::cout << std::setw(3) <<solution[i][j] << "  ";
-                else
-                    std::cout << std::setw(3) <<solution[i][j];
-            }
+            for (int j=0; j < solution[0].size(); ++j)
+                std::cout << std::setw(3) <<solution[i][j];
             std::cout << std::endl;
         }
     }
     void set_solution(std::vector<std::vector<std::string>> res){
-        solution=res;
+        this->solution=res;
     }
-    void PrintGrid(){
-        std::cout<< "MAZE is: " << std::endl;
-        for(int i =0 ; i < grid.size() ; ++i){
-            for (int j=0; j < grid[0].size(); ++j){
-                if ( (j == init[0]) && (i == init[1]) )
-                    std::cout <<  std::setw(3) <<"*" << "  ";
-                else if (j != (grid[0].size()-1))
-                    std::cout << std::setw(3) << grid[i][j] << "  ";
-                else if ( (j == goal[1]) && (i == goal[0]) )
-                    std::cout << std::setw(3) << "*" ; // goal
+    void PrintMap(){
+        std::cout<< "Map is: " << std::endl;
+        for(int row =0 ; row < this->map.size() ; ++row){
+            for (int col=0; col < this->map[0].size(); ++col){
+                if ((row == this->start[0]) && (col == this->start[1]))
+                    std::cout <<  std::setw(3) << "S"; // start
+                else if ((row == this->goal[0]) && (col == this->goal[1]))
+                    std::cout << std::setw(3) << "G"; // goal
                 else
-                    std::cout << std::setw(3) <<grid[i][j];
+                    std::cout << std::setw(3) <<this->map[row][col];
             }
             std::cout << std::endl;
         }
     }
-    std::vector<std::vector<int>> grid;
-    std::vector<int> init={0,0};
-    std::vector<int> goal;
+    std::vector<std::vector<int>> map;
+    std::vector<int> start={0,0};
+    std::vector<int> goal={0,0};
+
+    void PrintCost(){
+           /* if needed COST VALUE MONITORING, comment in)*/
+        std::cout<< "COST is: " << std::endl;
+        for(int i =0 ; i < count_traced.size() ; ++i){
+            for (int j=0; j < count_traced[0].size(); ++j){
+                if (j != (count_traced[0].size()-1))
+                    std::cout << std::setw(3) <<count_traced[i][j];
+                else
+                    std::cout << std::setw(3) <<count_traced[i][j];
+            }
+            std::cout << std::endl;
+    }
+    }
 
     private:
     std::vector<std::vector<std::string>> solution;
     std::string board_file;
-    
-
 };
 
 
